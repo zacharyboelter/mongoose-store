@@ -6,7 +6,8 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const mongoose = require('mongoose');
-const Book = require('./models/products.js')
+const Product = require('./models/products.js');
+
 // ===========================================================
 // MIDDLEWARE
 // ===========================================================
@@ -31,6 +32,38 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 app.use(express.static('public'));
 
 // ===========================================================
+// SEED DATA 
+// ===========================================================
+app.get('/products/seed', (req, res) => {
+    Product.create(
+        [
+            {
+                name: 'Beans',
+                description: 'A small pile of beans. Buy more beans for a big pile of beans.',
+                img: 'https://imgur.com/LEHS8h3.png',
+                price: 5,
+                qty: 99
+            }, {
+                name: 'Bones',
+                description: 'It\'s just a bag of bones.',
+                img: 'https://imgur.com/dalOqwk.png',
+                price: 25,
+                qty: 0
+            }, {
+                name: 'Bins',
+                description: 'A stack of colorful bins for your beans and bones.',
+                img: 'https://imgur.com/ptWDPO1.png',
+                price: 7000,
+                qty: 1
+            }
+        ]
+        ,
+        (error, data) => {
+            res.redirect('/products');
+        }
+    );
+});
+// ===========================================================
 // ROUTES 
 // ===========================================================
 // //index, create, show routes and pages maybe css for tuesday
@@ -38,7 +71,13 @@ app.use(express.static('public'));
 // ===========================================================
 // INDEX - display all products
 // ===========================================================
-
+app.get('/products', (req, res) => {
+    Product.find({}, (error, allProducts) => {
+        res.render('index.ejs', {
+            products: allProducts,
+        });
+    });
+});
 
 // ===========================================================
 // NEW - display form to add a new book

@@ -82,6 +82,9 @@ app.get('/products', (req, res) => {
 // ===========================================================
 // NEW - display form to add a new book
 // ===========================================================
+app.get('/products/new', (req, res) => {
+    res.render('new.ejs');
+});
 
 
 
@@ -100,9 +103,11 @@ app.get('/products', (req, res) => {
 // ===========================================================
 // CREATE - create a new book
 // ===========================================================
-
-
-
+app.post('/products', (req, res) => {
+    Product.create(req.body, (error, createdProduct) => {
+        res.redirect('/products');
+    });
+});
 // ===========================================================
 // EDIT - display form to update a book
 // ===========================================================
@@ -113,6 +118,13 @@ app.get('/products', (req, res) => {
 // SHOW - display a single book
 // ===========================================================
 
+app.get('/products/:id', (req, res) => {
+    Product.findById(req.params.id, (err, foundProduct) => {
+        res.render('show.ejs', {
+            product: foundProduct,
+        });
+    });
+});
 
 
 

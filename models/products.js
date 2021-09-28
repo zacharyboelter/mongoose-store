@@ -10,8 +10,8 @@ const productSchema = new mongoose.Schema({
     qty: { type: Number, required: true }
 });
 
-// Set the whole schema to var named 'Book'
+// Set the whole schema to var named 'Product'
 const Product = mongoose.model('Product', productSchema);
 
-// export to allow us to use Book var elsewhere in app
+// export to allow us to use Product var elsewhere in app
 module.exports = Product;

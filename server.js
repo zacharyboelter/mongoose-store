@@ -67,7 +67,6 @@ app.use(express.static('public'));
 // ===========================================================
 // ROUTES 
 // ===========================================================
-// //index, create, show routes and pages maybe css for tuesday
 
 // ===========================================================
 // INDEX - display all products
@@ -103,7 +102,11 @@ app.delete('/products/:id', (req, res) => {
 // ===========================================================
 // UPDATE - update a single product
 // ===========================================================
-
+app.put('/products/:id', (req, res) => {
+    Product.findByIdAndUpdate(req.params.id, req.body, { new: true }, (error, updatedProduct) => {
+        res.redirect(`/products/${req.params.id}`);
+    });
+});
 
 
 // ===========================================================
@@ -117,7 +120,13 @@ app.post('/products', (req, res) => {
 // ===========================================================
 // EDIT - display form to update a product
 // ===========================================================
-
+app.get('/products/:id/edit', (req, res) => {
+    Product.findById(req.params.id, (error, foundProduct) => {
+        res.render('edit.ejs', {
+            product: foundProduct
+        });
+    });
+});
 
 
 // ===========================================================

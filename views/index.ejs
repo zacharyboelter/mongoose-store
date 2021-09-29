@@ -16,17 +16,15 @@
     <h1>Products index page</h1>
     <ul>
         <!-- <fieldset> -->
-            <% products.forEach(product=> { %>
-                <li>
-                    <a href="/products/<%= product._id; %>">
-                        <%=product.name; %>
-                    </a>
-                    <form action="/products/<%= product.id %>?_method=DELETE" method="POST">
-                        <input type="submit" value="DELETE" />
-                    </form>
-                </li>
-                <% }) %>
-        <!-- </fieldset> -->
+        <% products.forEach(product=> { %>
+            <li>
+                <a class="link" href="/products/<%= product._id; %>">
+                    <%=product.name; %>
+                </a>
+                
+            </li>
+            <% }) %>
+                <!-- </fieldset> -->
     </ul>
 </body>
 

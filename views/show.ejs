@@ -7,25 +7,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Show</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+        integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
 </head>
 
-<body>
-    <nav>
-        <a href="/products">Back to Products Index</a>
+<body class="container">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/products/new">Add a New Product</a>
+        </div>
     </nav>
     <h1>
         <%=product.name %>
     </h1>
     Description: <%= product.description%>
         <br />
-        <img src="<%= product.img %>">
+        <img class="img-thumbnail" src="<%= product.img %>">
         <br />
         Price: <%= product.price%>
             How Many: <%= product.qty%>
-                <form style="display: inline;" action="/products/<%= product.id %>?_method=DELETE" method="POST">
-                    <input type="submit" value="DELETE" />
-                </form>
-                <a style="display: inline;" class="link" href="/products/<%=product._id%>/edit">Edit</a>
+                <div class="row">
+                    <div class="col-lg-1">
+                        <button class="btn btn-success">Buy</button>
+                    </div>
+                    <div class="col-md-1">
+                        <form action="/products/<%= product.id %>?_method=DELETE" method="POST">
+
+                            <input class="btn btn-danger" type="submit" value="DELETE" />
+                        </form>
+                    </div>
+
+                    <div class="col-md-10">
+                        <a class="btn btn-default" href="/products/<%=product._id%>/edit">Edit</a>
+                    </div>
+                </div>
 </body>
 
 </html>
